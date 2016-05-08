@@ -89,3 +89,8 @@ The `cf()` method can be used as a shortcut of `cf().txt()`
 ```
 cf('Plain text') === cf().txt('Plain text')
 ```
+
+#### Author
+
+(c) 2016 by Andifeind  
+Licensed under MIT license.
