@@ -3,7 +3,7 @@ Colorfy
 
 Colorfy your console output with pretty ANSI colors.
 
-Insatllation
+Installation
 ------------
 
 ```shell
