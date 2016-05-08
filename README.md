@@ -1,7 +1,7 @@
-Colorfy for Node.js
-===================
+Colorfy
+=======
 
-Colorfy your console output with ANSI colors.
+Colorfy your console output with pretty ANSI colors.
 
 Insatllation
 ------------
@@ -15,5 +15,5 @@ Usage
 
 ```js
 let cf = require('colorfy');
-console.log(cl().red('Hello').green('colorfied').blue('World!').colorfy());
+console.log(cl().red('Hello').green('colorful').blue('World!').colorfy());
 ```
