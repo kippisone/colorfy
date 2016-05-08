@@ -1,6 +1,6 @@
 {
   "name": "colorfy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Colorfies cli with ansi colors",
   "main": "lib/colorfy.js",
   "scripts": {
