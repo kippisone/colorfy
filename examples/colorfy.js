@@ -36,3 +36,7 @@ console.log(cf('Font style italic', 'italic').txt('italic').colorfy());
 console.log(cf('Font style underline', 'underline').txt('underline').colorfy());
 console.log(cf('Font style blink', 'blink').txt('blink').colorfy());
 console.log(cf('Font style invert', 'invert').txt('invert').colorfy());
+
+cf().txt('This text should be coloryfied in').red('fantastic red').grey('logged by print()').print();
+cf().txt('This text should be coloryfied in').yellow('fantastic yellow').grey('logged by print()').print();
+cf().txt('This text should be coloryfied in').green('fantastic green').grey('logged by print()').print();
