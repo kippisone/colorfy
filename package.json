@@ -4,7 +4,7 @@
   "description": "Colorfies cli with ansi colors",
   "main": "lib/colorfy.js",
   "scripts": {
-    "test": "npm test"
+    "test": "node examples/colorfy.js"
   },
   "repository": {
     "type": "git",
