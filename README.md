@@ -90,6 +90,17 @@ The `cf()` method can be used as a shortcut of `cf().txt()`
 cf('Plain text') === cf().txt('Plain text')
 ```
 
+### print()
+
+The print method prints a colorfy chain to the console.
+The comands below are the same
+
+```
+console.log(cf().red('All colors are beautiful').colorfy());
+cf().red('All colors are beautiful').print();
+```
+
+
 #### Author
 
 (c) 2016 by Andifeind  
