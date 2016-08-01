@@ -20,6 +20,24 @@ console.log(cf().txt('This text should be coloryfied in').ddgrey('fantastic ddgr
 console.log(cf().txt('This text should be coloryfied in').lgrey('fantastic lgrey').colorfy());
 console.log(cf().txt('This text should be coloryfied in').llgrey('fantastic llgrey').colorfy());
 
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic red', 'bgred').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic yellow', 'bgyellow').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic green', 'bggreen').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic blue', 'bgblue').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic fire', 'bgfire').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic orange', 'bgorange').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic azure', 'bgazure').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic lime', 'bglime').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic pink', 'bgpink').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic plum', 'bgplum').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic turq', 'bgturq').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic ored', 'bgored').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic grey', 'bggrey').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic dgrey', 'bgdgrey').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic ddgrey', 'bgddgrey').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic lgrey', 'bglgrey').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic llgrey', 'bgllgrey').colorfy());
+
 for (var i = 0; i < 256; i++) {
   console.log(cf().txt('Ansi color code ' + i).ansi(i, 'pretty color code').colorfy());
 }
