@@ -12,12 +12,19 @@
   },
   "keywords": [
     "color",
+    "colors",
     "colour",
     "colorify",
     "colorfy",
     "clicolor",
+    "clicolors",
     "ansi",
-    "ansicolor"
+    "ansicolor",
+    "cli",
+    "commandline",
+    "terminal",
+    "tty",
+    "console"
   ],
   "author": "Andi Heinkelein <andifeind@noname-media.com>",
   "license": "MIT",
