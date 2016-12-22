@@ -36,6 +36,9 @@ Pass `colorfy()` as last method to a chain to get a pretty colorful string
 `plum(text, [styles])` Draws plum text  
 `turq(text, [styles])` Draws turquoise text  
 `ored(text, [styles])` Draws orangered text  
+`dred(text, [styles])` Draws dark red text  
+`dgreen(text, [styles])` Draws dark green text  
+`dblue(text, [styles])` Draws dark blue text  
 `grey(text, [styles])` Draws grey text  
 `dgrey(text, [styles])` Draws dark grey text  
 `ddgrey(text, [styles])` Draws dark dark grey text  
@@ -71,6 +74,9 @@ The `styles` argument is optional and defines the text style.
 `bgplum` Draws plum background  
 `bgturq` Draws turquoise background  
 `bgored` Draws orangered background  
+`bgdred` Draws dark red background  
+`bgdgreen` Draws dark green background  
+`bgdblue` Draws dark blue background  
 `bggrey` Draws grey background  
 `bgdgrey` Draws dark grey background  
 `bgddgrey` Draws dark dark grey background  
@@ -84,7 +90,7 @@ Seperate multiple stylings by a space `cf().red('foo', 'bold underline')`
 
 Background colors can be set as a style. See list above with all supported background styles
 
-```
+```js
 cf().black('Black text on yellow background', 'bgyellow');
 ```
 
@@ -93,13 +99,13 @@ cf().black('Black text on yellow background', 'bgyellow');
 
 All texts are joined by a space character. The trim parameter can be used to avoid joining by spaces.
 
-```
+```js
 cf().grey('(').green('20ms').grey(')').colorfy();
 ```
 returns `( 20ms )`
 
 
-```
+```js
 cf().grey('(').green('20ms', 'trim').grey(')').colorfy();
 ```
 returns `(20ms)` (No space around the number)
@@ -108,14 +114,14 @@ returns `(20ms)` (No space around the number)
 
 The `colorfy()` method returns a colorfied string of the colorfy chain. Colorization can be skiped by passing `false` as first argument to `colorfy()`
 
-```
+```js
 cf().red('All colors are beautiful').colorfy();      //Returns a colofied string
 cf().red('All colors are beautiful').colorfy(false); //Returns a plain string
 ```
 
 The `cf()` method can be used as a shortcut of `cf().txt()`
 
-```
+```js
 cf('Plain text') === cf().txt('Plain text')
 ```
 
@@ -124,11 +130,21 @@ cf('Plain text') === cf().txt('Plain text')
 The print method prints a colorfy chain to the console.
 The comands below are the same
 
-```
+```js
 console.log(cf().red('All colors are beautiful').colorfy());
 cf().red('All colors are beautiful').print();
 ```
 
+### Pluralization
+
+Texts can be pluralized. Add an `[singular, plural, number]` array as a text block and *colorfy* returns the singular version if `number === 1` otherwise the plural.
+
+```js
+const passedTests = 35;
+const failedTests = 1;
+cf().green(passedTests).txt(['test passed', 'tests passed', passedTests]).print());
+cf().red(failedTests).txt(['test failed', 'tests failed', failedTests]).print());
+```
 
 #### Author
 

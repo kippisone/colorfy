@@ -3,9 +3,12 @@
 let cf = require('../lib/colorfy');
 
 console.log(cf().txt('This text should be coloryfied in').red('fantastic red').colorfy());
+console.log(cf().txt('This text should be coloryfied in').dred('fantastic dark red').colorfy());
 console.log(cf().txt('This text should be coloryfied in').yellow('fantastic yellow').colorfy());
 console.log(cf().txt('This text should be coloryfied in').green('fantastic green').colorfy());
+console.log(cf().txt('This text should be coloryfied in').dgreen('fantastic dark green').colorfy());
 console.log(cf().txt('This text should be coloryfied in').blue('fantastic blue').colorfy());
+console.log(cf().txt('This text should be coloryfied in').dblue('fantastic dark blue').colorfy());
 console.log(cf().txt('This text should be coloryfied in').fire('fantastic fire').colorfy());
 console.log(cf().txt('This text should be coloryfied in').orange('fantastic orange').colorfy());
 console.log(cf().txt('This text should be coloryfied in').azure('fantastic azure').colorfy());
@@ -21,9 +24,12 @@ console.log(cf().txt('This text should be coloryfied in').lgrey('fantastic lgrey
 console.log(cf().txt('This text should be coloryfied in').llgrey('fantastic llgrey').colorfy());
 
 console.log(cf().txt('This text background should be coloryfied in').txt('fantastic red', 'bgred').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic dark red', 'bgdred').colorfy());
 console.log(cf().txt('This text background should be coloryfied in').black('fantastic yellow', 'bgyellow').colorfy());
 console.log(cf().txt('This text background should be coloryfied in').black('fantastic green', 'bggreen').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').black('fantastic dark green', 'bgdgreen').colorfy());
 console.log(cf().txt('This text background should be coloryfied in').txt('fantastic blue', 'bgblue').colorfy());
+console.log(cf().txt('This text background should be coloryfied in').txt('fantastic dark blue', 'bgdblue').colorfy());
 console.log(cf().txt('This text background should be coloryfied in').txt('fantastic fire', 'bgfire').colorfy());
 console.log(cf().txt('This text background should be coloryfied in').black('fantastic orange', 'bgorange').colorfy());
 console.log(cf().txt('This text background should be coloryfied in').black('fantastic azure', 'bgazure').colorfy());
