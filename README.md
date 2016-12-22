@@ -36,6 +36,9 @@ Pass `colorfy()` as last method to a chain to get a pretty colorful string
 `plum(text, [styles])` Draws plum text  
 `turq(text, [styles])` Draws turquoise text  
 `ored(text, [styles])` Draws orangered text  
+`dred(text, [styles])` Draws dark red text  
+`dgreen(text, [styles])` Draws dark green text  
+`dblue(text, [styles])` Draws dark blue text  
 `grey(text, [styles])` Draws grey text  
 `dgrey(text, [styles])` Draws dark grey text  
 `ddgrey(text, [styles])` Draws dark dark grey text  
@@ -71,6 +74,9 @@ The `styles` argument is optional and defines the text style.
 `bgplum` Draws plum background  
 `bgturq` Draws turquoise background  
 `bgored` Draws orangered background  
+`bgdred` Draws dark red background  
+`bgdgreen` Draws dark green background  
+`bgdblue` Draws dark blue background  
 `bggrey` Draws grey background  
 `bgdgrey` Draws dark grey background  
 `bgddgrey` Draws dark dark grey background  
