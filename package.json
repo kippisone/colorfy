@@ -2,9 +2,9 @@
   "name": "colorfy",
   "version": "0.5.0",
   "description": "Colorfies cli with ansi colors",
-  "main": "lib/colorfy.js",
+  "main": "src/colorfy.js",
   "scripts": {
-    "test": "node examples/colorfy.js"
+    "test": "mocha --reporter lagoon-reporter tests/**/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -31,5 +31,12 @@
   "bugs": {
     "url": "https://github.com/Andifeind/colorfy/issues"
   },
-  "homepage": "https://github.com/Andifeind/colorfy#readme"
+  "homepage": "https://github.com/Andifeind/colorfy#readme",
+  "devDependencies": {
+    "@noname-media/eslint-config-standard": "1.1.0",
+    "inspect.js": "1.9.0",
+    "lagoon-reporter": "0.3.4",
+    "mocha": "4.0.1",
+    "sinon": "4.0.1"
+  }
 }
