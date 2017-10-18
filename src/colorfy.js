@@ -544,6 +544,10 @@ class Colorfy {
       color = '38;5;' + color
     }
 
+    if (!color && !style) {
+      return ''
+    }
+
     return `\u001b[${color}${style}m`
   }
 
