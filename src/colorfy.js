@@ -25,6 +25,10 @@ class Colorfy {
   constructor () {
     this.text = []
     this.lines = []
+    this.curLine = {
+      values: [],
+      indention: 0
+    }
 
     this.__config = {
       trim: false,
@@ -439,6 +443,21 @@ class Colorfy {
 
   nl (num) {
     this.text.push([null, '\n'.repeat(num || 1)])
+
+    this.lines.push(this.curLine)
+
+    if (num) {
+      this.lines.push({
+        values: [['', num >= 1 ? '\n'.repeat(num - 1) : '']],
+        indention: 0
+      })
+    }
+
+    this.curLine = {
+      values: [],
+      indention: this.__indention
+    }
+
     return this
   }
 
@@ -522,24 +541,44 @@ class Colorfy {
     }
 
     this.text.push([styles, text, this.__indention])
-    const chunks = text.split(/\n/g)
-    chunks.forEach((line) => {
 
-    })
-    this.lines.push([styles, text, this.__indention])
+    const chunks = text.split(/\n/g)
+    const firstLine = chunks.shift()
+    this.curLine.values.push([styles, firstLine])
+    if (chunks !== null) {
+      chunks.forEach((line) => {
+        this.lines.push(this.curLine)
+        this.curLine = {
+          values: [[styles, line]],
+          indention: this.__indention
+        }
+      })
+    }
+
     this.trimLeft = this.trimRight
     this.trimRight = false
   }
 
-  flush (printColors) {
-    this.text.map((txt) => {
-      if (!txt[2]) {
-        return txt[0] ? txt[0] + txt[1] + '\u001b[m' : txt[1]
-      }
+  getValue(txt) {
+    return txt[0] ? txt[0] + txt[1] + '\u001b[m' : txt[1]
+  }
 
-      const indentionStr = ' '.repeat(this.__indention * this.__config.indent)
-      const str = txt[1].replace(/\n(?!\n)/g, '\n' + indentionStr)
-    }).join(this.__config.trim ? '' : ' ')
+  flush (printColors) {
+    this.lines.push(this.curLine)
+    this.curLine = {
+      values: [],
+      indention: this.__indention
+    }
+
+    return this.lines.map((line) => {
+      return line.values.map((chunk) => {
+        if (!printColors) {
+          return chunk[1]
+        }
+
+        return chunk[0] ? chunk[0] + chunk[1] + '\u001b[m' : chunk[1]
+      }).join('')
+    }).join('\n')
   }
 
   toString () {

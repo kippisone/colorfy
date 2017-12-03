@@ -1,4 +1,5 @@
 const inspect = require('inspect.js')
+const tb = require('testberry')
 const sinon = require('sinon')
 inspect.useSinon(sinon)
 
@@ -29,6 +30,26 @@ const COLOR_BLACK = '0'
 const COLOR_WHITE = '15'
 
 describe('Colorfy', () => {
+  tb.define('first-line', () => {
+    const cf = colorfy()
+    cf.config({
+      trim: true
+    })
+    cf.addTextItem('\u001b[;1m', 'Hello World')
+    return cf
+  })
+
+  tb.define('second-line', (cf) => {
+    cf.nl()
+    cf.addTextItem('', 'everything is awesome')
+    return cf
+  })
+
+  tb.define('third-line', (cf) => {
+    cf.addTextItem('\u001b[38;5;34;m', '...\nabsolutely\neverything')
+    return cf
+  })
+
   describe('colorfy()', () => {
     it('Returns a colorfy object', () => {
       const cf = colorfy()
@@ -204,6 +225,70 @@ describe('Colorfy', () => {
           inspect(str).isEql(`\u001b[38;5;${test.color}${style.value}mHello World!\u001b[m`)
         })
       })
+    })
+  })
+
+  describe('addTextItem()', () => {
+    it('has a curLine property', () => {
+      const cf = tb.run(['first-line'])
+      inspect(cf.curLine).isEql({
+        values: [['\u001b[;1m', 'Hello World']],
+        indention: 0
+      })
+
+      inspect(cf.lines).isArray().hasLength(0)
+    })
+
+    it('push styled lines into the buffer', () => {
+      const cf = tb.run(['first-line', 'second-line'])
+
+      inspect(cf.curLine).isEql({
+        values: [
+          ['', 'everything is awesome']
+        ],
+        indention: 0
+      })
+
+      inspect(cf.lines).isArray().hasLength(2)
+    })
+
+    it('push more lines', () => {
+      const cf = tb.run(['first-line', 'second-line', 'third-line'])
+
+      inspect(cf.curLine).isEql({
+        values: [
+          ['\u001b[38;5;34;m', 'everything']
+
+        ],
+        indention: 0
+      })
+
+      inspect(cf.lines).isArray().hasLength(4)
+    })
+
+    it('lines is an array of line items', () => {
+      const cf = tb.run(['first-line', 'second-line', 'third-line'])
+
+      inspect(cf.lines).isEql([
+        { indention: 0, values: [ ['\u001b[;1m', 'Hello World'] ] },
+        { indention: 0, values: [ ['', ''] ] },
+        { indention: 0, values: [ ['', 'everything is awesome'], ['\u001b[38;5;34;m', '...'] ] },
+        { indention: 0, values: [ ['\u001b[38;5;34;m', 'absolutely'] ] }
+      ])
+    })
+  })
+
+  describe('flush()', () => {
+    it('Flushs all buffered lines and returns it as a string', () => {
+      const cf = tb.run(['first-line', 'second-line', 'third-line'])
+      const str = cf.flush(true)
+      console.log(str)
+      inspect(str).isEql(
+        '\u001b[;1mHello World\u001b[m\n' +
+        'everything is awesome\u001b[38;5;34;m...\u001b[m\n' +
+        '\u001b[38;5;34;mabsolutely\u001b[m\n' +
+        '\u001b[38;5;34;meverything\u001b[m'
+      )
     })
   })
 })
