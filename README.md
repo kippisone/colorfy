@@ -1,6 +1,8 @@
 Colorfy
 =======
 
+[![Build Status](https://travis-ci.org/Andifeind/colorfy.svg?branch=master)](https://travis-ci.org/Andifeind/colorfy)
+
 Colorfy your console output with pretty ANSI colors.
 
 Installation
@@ -48,8 +50,8 @@ Pass `colorfy()` as last method to a chain to get a pretty colorful string
 `black(text, [styles])` Draws black text  
 `white(text, [styles])` Draws white text  
 `txt(text, [styles])` Draws text in default color. Without any styling  
-`ansi(color, text, [styles])` Draws text in any ansi color. Must be a number between 0 and 255
-`auto(text, [styles])` Calculates a cross number between 0 and 99 of the input text uses a `color based of this cross number. This feature could be usefull for logging of hash values.  
+`ansi(color, text, [styles])` Draws text in any ansi color. Must be a number between 0 and 255  
+`auto(text, [styles])` Calculates a cross number between 0 and 99 of the input and uses a color based on this cross number. This feature could be useful for logging of hash values.  
 
 Run `node examples/colorfy.js` to see colorfy in action. It gives you a list of all ansi color codes.  
 
@@ -97,7 +99,7 @@ cf().black('Black text on yellow background', 'bgyellow');
 
 ### Trim
 
-All texts are joined by a space character. The trim parameter can be used to avoid joining by spaces.
+All texts getting joined by a space character. The trim parameter can be used to avoid joining by spaces.
 
 ```js
 cf().grey('(').green('20ms').grey(')').colorfy();
@@ -127,7 +129,7 @@ cf('Plain text') === cf().txt('Plain text')
 
 ### print()
 
-The print method prints a colorfy chain to the console.
+The print method prints a colorfy chain to stdout.
 The comands below are the same
 
 ```js
