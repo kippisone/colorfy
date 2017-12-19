@@ -1,9 +1,12 @@
 'use strict'
 
 const COLOR_RED = '160'
+const COLOR_DRED = '124'
 const COLOR_YELLOW = '226'
 const COLOR_GREEN = '34'
+const COLOR_DGREEN = '28'
 const COLOR_BLUE = '21'
+const COLOR_DBLUE = '18'
 const COLOR_FIRE = '196'
 const COLOR_ORANGE = '208'
 const COLOR_AZURE = '33'
@@ -23,7 +26,6 @@ const COLOR_WHITE = '15'
 
 class Colorfy {
   constructor () {
-    this.text = []
     this.lines = []
     this.curLine = {
       values: [],
@@ -36,6 +38,8 @@ class Colorfy {
     }
 
     this.__indention = 0
+    this.trimLeft = true
+    this.isTTY = process.stdout.isTTY
   }
 
   config (conf) {
@@ -63,6 +67,22 @@ class Colorfy {
   red (text, styles) {
     if (text) {
       this.addTextItem(this.getColorCode(COLOR_RED, styles), text)
+    }
+    return this
+  }
+
+  /**
+   * Draws dark red text
+   *
+   * @method dred
+   * @param  {String} text   Text to be colorfied
+   * @param  {String} styles Text styles (bold underlined)
+   * @chainable
+   * @return {object}        Returns this value
+   */
+  dred (text, styles) {
+    if (text) {
+      this.addTextItem(this.getColorCode(COLOR_DRED, styles), text)
     }
     return this
   }
@@ -102,6 +122,23 @@ class Colorfy {
   }
 
   /**
+   * Draws dark green text
+   *
+   * @method dgreen
+   * @param  {String} text   Text to be colorfied
+   * @param  {String} styles Text styles (bold underlined)
+   * @chainable
+   * @return {object}        Returns this value
+   */
+  dgreen (text, styles) {
+    if (text) {
+      this.addTextItem(this.getColorCode(COLOR_DGREEN, styles), text)
+    }
+
+    return this
+  }
+
+  /**
    * Draws blue text
    *
    * @method blue
@@ -113,6 +150,23 @@ class Colorfy {
   blue (text, styles) {
     if (text) {
       this.addTextItem(this.getColorCode(COLOR_BLUE, styles), text)
+    }
+
+    return this
+  }
+
+  /**
+   * Draws dark blue text
+   *
+   * @method dblue
+   * @param  {String} text   Text to be colorfied
+   * @param  {String} styles Text styles (bold underlined)
+   * @chainable
+   * @return {object}        Returns this value
+   */
+  dblue (text, styles) {
+    if (text) {
+      this.addTextItem(this.getColorCode(COLOR_DBLUE, styles), text)
     }
 
     return this
@@ -442,8 +496,6 @@ class Colorfy {
   }
 
   nl (num) {
-    this.text.push([null, '\n'.repeat(num || 1)])
-
     this.lines.push(this.curLine)
 
     if (num) {
@@ -467,19 +519,7 @@ class Colorfy {
    * @return {String} Returns a colorfied string
    */
   colorfy (printColors) {
-    if (printColors === false) {
-      return this.text.map(txt => txt[1]).join('')
-    }
-
-    let colorfied = this.text.map(txt => {
-      if (!txt[0]) {
-        return txt[1]
-      }
-      return txt[0] + txt[1] + '\u001b[m'
-    }).join('')
-
-    this.text = []
-    return colorfied
+    return this.flush(printColors === false ? false : this.isTTY)
   }
 
   getColorCode (color, styles) {
@@ -497,9 +537,12 @@ class Colorfy {
           case 'ltrim': this.trimLeft = true; break
           case 'rtrim': this.trimRight = true; break
           case 'bgred' : style += ';48;5;' + COLOR_RED; break
+          case 'bgdred' : style += ';48;5;' + COLOR_DRED; break
           case 'bgyellow' : style += ';48;5;' + COLOR_YELLOW; break
+          case 'bgdgreen' : style += ';48;5;' + COLOR_DGREEN; break
           case 'bggreen' : style += ';48;5;' + COLOR_GREEN; break
           case 'bgblue' : style += ';48;5;' + COLOR_BLUE; break
+          case 'bgdblue' : style += ';48;5;' + COLOR_DBLUE; break
           case 'bgfire' : style += ';48;5;' + COLOR_FIRE; break
           case 'bgorange' : style += ';48;5;' + COLOR_ORANGE; break
           case 'bgazure' : style += ';48;5;' + COLOR_AZURE; break
@@ -539,8 +582,6 @@ class Colorfy {
     if (!this.trimLeft && this.__config.trim === false) {
       styles = ' ' + styles
     }
-
-    this.text.push([styles, text, this.__indention])
 
     const chunks = text.split(/\n/g)
     const firstLine = chunks.shift()
@@ -582,7 +623,7 @@ class Colorfy {
   }
 
   toString () {
-    return this.text.map(txt => txt[1]).join(' ').substr(1)
+    return this.flush()
   }
 
   /**
@@ -590,7 +631,7 @@ class Colorfy {
    * @param  {Boolean} printColors Set this to false to disable colorfied output
    */
   print (printColors) {
-    console.log(this.colorfy(printColors))
+    console.log(this.flush(printColors))
   }
 }
 
