@@ -304,10 +304,10 @@ describe('Colorfy', () => {
       const cf = tb.run(['first-line-indent', 'second-line', 'third-line'])
       const str = cf.flush(true)
       inspect(str).isEql(
-        '  \u001b[;1mHello World\u001b[m\n' +
-        '  everything is awesome\u001b[38;5;34;m...\u001b[m\n' +
-        '  \u001b[38;5;34;mabsolutely\u001b[m\n' +
-        '  \u001b[38;5;34;meverything\u001b[m'
+        ' \u001b[;1mHello World\u001b[m\n' +
+        ' everything is awesome\u001b[38;5;34;m...\u001b[m\n' +
+        ' \u001b[38;5;34;mabsolutely\u001b[m\n' +
+        ' \u001b[38;5;34;meverything\u001b[m'
       )
     })
   })

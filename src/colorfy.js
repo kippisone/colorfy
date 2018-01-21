@@ -52,6 +52,10 @@ class Colorfy {
       this.__indention += size
     }
 
+    if (this.lines.length === 0) {
+      this.curLine.indention = size
+    }
+
     return this
   }
 
@@ -600,7 +604,7 @@ class Colorfy {
     this.trimRight = false
   }
 
-  getValue(txt) {
+  getValue (txt) {
     return txt[0] ? txt[0] + txt[1] + '\u001b[m' : txt[1]
   }
 
@@ -612,7 +616,8 @@ class Colorfy {
     }
 
     return this.lines.map((line) => {
-      return line.values.map((chunk) => {
+      const indentionStr = line.indention ? ' '.repeat(line.indention) : ''
+      return indentionStr + line.values.map((chunk) => {
         if (!printColors) {
           return chunk[1]
         }
