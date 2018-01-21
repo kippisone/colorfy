@@ -636,7 +636,7 @@ class Colorfy {
    * @param  {Boolean} printColors Set this to false to disable colorfied output
    */
   print (printColors) {
-    console.log(this.flush(printColors))
+    console.log(this.flush(printColors === false ? false : this.isTTY))
   }
 }
 
