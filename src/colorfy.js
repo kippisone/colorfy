@@ -591,6 +591,8 @@ class Colorfy {
       return
     }
 
+    text = String(text)
+
     const chunks = text.split(/\n/g)
     const firstLine = chunks.shift()
     this.curLine.values.push([styles, firstLine])
