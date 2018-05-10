@@ -26,7 +26,37 @@ const COLOR_WHITE = '15'
 
 class Colorfy {
   constructor () {
-    this.text = []
+    this.lines = []
+    this.curLine = {
+      values: [],
+      indention: 0
+    }
+
+    this.__config = {
+      trim: false,
+      indention: 2
+    }
+
+    this.__indention = 0
+    this.trimLeft = true
+    this.isTTY = process.stdout.isTTY
+  }
+
+  config (conf) {
+    Object.assign(this.__config, conf)
+    return this
+  }
+
+  indent (size) {
+    if (size) {
+      this.__indention += size
+    }
+
+    if (this.lines.length === 0) {
+      this.curLine.indention = size
+    }
+
+    return this
   }
 
   /**
@@ -470,7 +500,20 @@ class Colorfy {
   }
 
   nl (num) {
-    this.text.push([null, '\n'.repeat(num || 1)])
+    this.lines.push(this.curLine)
+
+    if (num) {
+      this.lines.push({
+        values: [['', num >= 1 ? '\n'.repeat(num - 1) : '']],
+        indention: 0
+      })
+    }
+
+    this.curLine = {
+      values: [],
+      indention: this.__indention
+    }
+
     return this
   }
 
@@ -480,19 +523,7 @@ class Colorfy {
    * @return {String} Returns a colorfied string
    */
   colorfy (printColors) {
-    if (printColors === false) {
-      return this.text.map(txt => txt[1]).join('')
-    }
-
-    let colorfied = this.text.map(txt => {
-      if (!txt[0]) {
-        return txt[1]
-      }
-      return txt[0] + txt[1] + '\u001b[m'
-    }).join('')
-
-    this.text = []
-    return colorfied
+    return this.flush(printColors === false ? false : this.isTTY)
   }
 
   getColorCode (color, styles) {
@@ -512,8 +543,8 @@ class Colorfy {
           case 'bgred' : style += ';48;5;' + COLOR_RED; break
           case 'bgdred' : style += ';48;5;' + COLOR_DRED; break
           case 'bgyellow' : style += ';48;5;' + COLOR_YELLOW; break
-          case 'bggreen' : style += ';48;5;' + COLOR_GREEN; break
           case 'bgdgreen' : style += ';48;5;' + COLOR_DGREEN; break
+          case 'bggreen' : style += ';48;5;' + COLOR_GREEN; break
           case 'bgblue' : style += ';48;5;' + COLOR_BLUE; break
           case 'bgdblue' : style += ';48;5;' + COLOR_DBLUE; break
           case 'bgfire' : style += ';48;5;' + COLOR_FIRE; break
@@ -540,7 +571,7 @@ class Colorfy {
       })
     }
 
-    if (color || color === 0) {
+    if (color) {
       color = '38;5;' + color
     }
 
@@ -552,21 +583,58 @@ class Colorfy {
   }
 
   addTextItem (styles, text) {
-    if (!this.trimLeft && styles) {
+    if (!this.trimLeft && this.__config.trim === false) {
       styles = ' ' + styles
     }
 
-    if (Array.isArray(text)) {
-      text = this.pluralize(text[0], text[1], text[2])
+    if (!text) {
+      return
     }
 
-    this.text.push([styles.replace(/^ /, ''), text])
+    text = String(text)
+
+    const chunks = text.split(/\n/g)
+    const firstLine = chunks.shift()
+    this.curLine.values.push([styles, firstLine])
+    if (chunks !== null) {
+      chunks.forEach((line) => {
+        this.lines.push(this.curLine)
+        this.curLine = {
+          values: [[styles, line]],
+          indention: this.__indention
+        }
+      })
+    }
+
     this.trimLeft = this.trimRight
     this.trimRight = false
   }
 
+  getValue (txt) {
+    return txt[0] ? txt[0] + txt[1] + '\u001b[m' : txt[1]
+  }
+
+  flush (printColors) {
+    this.lines.push(this.curLine)
+    this.curLine = {
+      values: [],
+      indention: this.__indention
+    }
+
+    return this.lines.map((line) => {
+      const indentionStr = line.indention ? ' '.repeat(line.indention) : ''
+      return indentionStr + line.values.map((chunk) => {
+        if (!printColors) {
+          return chunk[1]
+        }
+
+        return chunk[0] ? chunk[0] + chunk[1] + '\u001b[m' : chunk[1]
+      }).join('')
+    }).join('\n')
+  }
+
   toString () {
-    return this.text.map(txt => txt[1]).join(' ').substr(1)
+    return this.flush()
   }
 
   /**
@@ -574,15 +642,7 @@ class Colorfy {
    * @param  {Boolean} printColors Set this to false to disable colorfied output
    */
   print (printColors) {
-    console.log(this.colorfy(printColors))
-  }
-
-  pluralize (singular, plural, num) {
-    if (num === 1) {
-      return singular
-    }
-
-    return plural
+    console.log(this.flush(printColors === false ? false : this.isTTY))
   }
 }
 

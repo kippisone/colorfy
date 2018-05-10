@@ -1,4 +1,5 @@
 const inspect = require('inspect.js')
+const tb = require('testberry')
 const sinon = require('sinon')
 inspect.useSinon(sinon)
 
@@ -29,24 +30,55 @@ const COLOR_BLACK = '0'
 const COLOR_WHITE = '15'
 
 describe('Colorfy', () => {
+  tb.define('first-line', () => {
+    const cf = colorfy()
+    cf.config({
+      trim: true
+    })
+    cf.addTextItem('\u001b[;1m', 'Hello World')
+    return cf
+  })
+
+  tb.define('first-line-indent', () => {
+    const cf = colorfy()
+    cf.indent(1)
+    cf.config({
+      trim: true
+    })
+    cf.addTextItem('\u001b[;1m', 'Hello World')
+    return cf
+  })
+
+  tb.define('second-line', (cf) => {
+    cf.nl()
+    cf.addTextItem('', 'everything is awesome')
+    return cf
+  })
+
+  tb.define('third-line', (cf) => {
+    cf.addTextItem('\u001b[38;5;34;m', '...\nabsolutely\neverything')
+    return cf
+  })
+
   describe('colorfy()', () => {
     it('Returns a colorfy object', () => {
       const cf = colorfy()
       inspect(cf).isObject()
       inspect(cf).hasMethod('txt')
       inspect(cf).hasMethod('colorfy')
-      inspect(cf).hasKey('text')
-      inspect(cf.text).isArray()
+      inspect(cf).hasKey('lines')
+      inspect(cf.lines).isArray()
     })
 
     it('creates a plain text item without any formating', () => {
       const cf = colorfy('Hello World!')
-      inspect(cf.text).hasLength(1)
-      inspect(cf.text).getItem(0).isArray()
-      inspect(cf.text[0]).isEql([
-        '',
-        'Hello World!'
-      ])
+      inspect(cf.lines).hasLength(0)
+      inspect(cf.curLine).isEql({
+        indention: 0,
+        values: [[
+          '',
+          'Hello World!'
+        ]]})
     })
 
     it('renders a plain text string without any formating, colors disabled', () => {
@@ -66,12 +98,12 @@ describe('Colorfy', () => {
     it('Creates a plain text item without any colorizing', () => {
       const cf = colorfy()
       cf.txt('Hello World!')
-      inspect(cf.text).hasLength(1)
-      inspect(cf.text).getItem(0).isArray()
-      inspect(cf.text[0]).isEql([
-        '',
-        'Hello World!'
-      ])
+      inspect(cf.curLine).isEql({
+        indention: 0,
+        values: [[
+          '',
+          'Hello World!'
+        ]]})
     })
 
     it('renders a plain text string without any formating, colors disabled', () => {
@@ -91,12 +123,12 @@ describe('Colorfy', () => {
     it('Creates a colorized text item without any colorizing', () => {
       const cf = colorfy()
       cf.ansi(123, 'Hello World!')
-      inspect(cf.text).hasLength(1)
-      inspect(cf.text).getItem(0).isArray()
-      inspect(cf.text[0]).isEql([
-        '\u001b[38;5;123m',
-        'Hello World!'
-      ])
+      inspect(cf.curLine).isEql({
+        indention: 0,
+        values: [[
+          '\u001b[38;5;123m',
+          'Hello World!'
+        ]]})
     })
 
     it('renders a colorized text string without any formating, colors disabled', () => {
@@ -174,12 +206,12 @@ describe('Colorfy', () => {
       it('Creates a colorized text item without any colorizing', () => {
         const cf = colorfy()
         cf[test.name]('Hello World!')
-        inspect(cf.text).hasLength(1)
-        inspect(cf.text).getItem(0).isArray()
-        inspect(cf.text[0]).isEql([
-          `\u001b[38;5;${test.color}m`,
-          'Hello World!'
-        ])
+        inspect(cf.curLine).isEql({
+          indention: 0,
+          values: [[
+            `\u001b[38;5;${test.color}m`,
+            'Hello World!'
+          ]]})
       })
 
       it('renders a colorized text string, colors disabled', () => {
@@ -200,10 +232,83 @@ describe('Colorfy', () => {
         it(`renders a colorized ${style.name} text string`, () => {
           const cf = colorfy()
           cf.ansi(test.color, 'Hello World!', style.name)
-          const str = cf.colorfy(true)
+          const str = cf.flush(true)
           inspect(str).isEql(`\u001b[38;5;${test.color}${style.value}mHello World!\u001b[m`)
         })
       })
+    })
+  })
+
+  describe('addTextItem()', () => {
+    it('has a curLine property', () => {
+      const cf = tb.run(['first-line'])
+      inspect(cf.curLine).isEql({
+        values: [['\u001b[;1m', 'Hello World']],
+        indention: 0
+      })
+
+      inspect(cf.lines).isArray().hasLength(0)
+    })
+
+    it('push styled lines into the buffer', () => {
+      const cf = tb.run(['first-line', 'second-line'])
+
+      inspect(cf.curLine).isEql({
+        values: [
+          ['', 'everything is awesome']
+        ],
+        indention: 0
+      })
+
+      inspect(cf.lines).isArray().hasLength(1)
+    })
+
+    it('push more lines', () => {
+      const cf = tb.run(['first-line', 'second-line', 'third-line'])
+
+      inspect(cf.curLine).isEql({
+        values: [
+          ['\u001b[38;5;34;m', 'everything']
+
+        ],
+        indention: 0
+      })
+
+      inspect(cf.lines).isArray().hasLength(3)
+    })
+
+    it('lines is an array of line items', () => {
+      const cf = tb.run(['first-line', 'second-line', 'third-line'])
+
+      inspect(cf.lines).isEql([
+        { indention: 0, values: [ ['\u001b[;1m', 'Hello World'] ] },
+        { indention: 0, values: [ ['', 'everything is awesome'], ['\u001b[38;5;34;m', '...'] ] },
+        { indention: 0, values: [ ['\u001b[38;5;34;m', 'absolutely'] ] }
+      ])
+    })
+  })
+
+  describe('flush()', () => {
+    it('Flushes all buffered lines and returns it as a string', () => {
+      const cf = tb.run(['first-line', 'second-line', 'third-line'])
+      const str = cf.flush(true)
+      inspect(str).isEql(
+        '\u001b[;1mHello World\u001b[m\n' +
+        'everything is awesome\u001b[38;5;34;m...\u001b[m\n' +
+        '\u001b[38;5;34;mabsolutely\u001b[m\n' +
+        '\u001b[38;5;34;meverything\u001b[m'
+      )
+    })
+
+    it('Flushes all buffered lines and returns it as a string, with an indention of 2', () => {
+      const cf = tb.run(['first-line-indent', 'second-line', 'third-line'])
+      const str = cf.flush(true)
+      inspect(str).isEql(
+        ' \u001b[;1mHello World\u001b[m\n' +
+        ' everything is awesome\u001b[38;5;34;m...\u001b[m\n' +
+        ' \u001b[38;5;34;mabsolutely\u001b[m\n' +
+        ' \u001b[38;5;34;meverything\u001b[m'
+      )
     })
   })
 })
