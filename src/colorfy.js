@@ -698,6 +698,6 @@ module.exports.ansi = (colorCode, text, styles) => {
 color.colorMethods.forEach((col) => {
   module.exports[col.name] = (text, styles) => {
     const colorfy = new Colorfy()
-    return colorfy.ansi(col.color, text, styles).colorfy()
+    return colorfy.ansi(col.color, text, styles).colorfy(true)
   }
 })
