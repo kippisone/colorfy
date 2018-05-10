@@ -6,6 +6,7 @@ Colorfy
 Colorfy your console output with pretty ANSI colors.
 
 Supports:
+* Zero dependencies
 * 256 ANSI color codes
 * Pluralization
 * Text indention
