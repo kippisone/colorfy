@@ -5,6 +5,14 @@ Colorfy
 
 Colorfy your console output with pretty ANSI colors.
 
+Supports:
+* 256 ANSI color codes
+* Pluralization
+* Text indention
+* Static color methods
+
+![Colorfy in action](https://static.noname-media.com/colorfy/colorfy-in-action.png)
+
 Installation
 ------------
 
@@ -102,18 +110,21 @@ cf().black('Black text on yellow background', 'bgyellow');
 ```
 
 
-### Trim
+### Joining
 
-All texts getting joined by a space character. The trim parameter can be used to avoid joining by spaces.
+Since `v2.0.0`, auto joining was disabled by default. To enable joining of text blocks by a space, set the `autoJoin` flag to true.
+All texts getting joined by a space character if joining is enabled. The trim parameter can be used to avoid joining for a certain text block.
 
 ```js
-cf().grey('(').green('20ms').grey(')').colorfy();
+const cf = colorfy({ autoJoin: true })
+cf.grey('(').green('20ms').grey(')').colorfy();
 ```
 returns `( 20ms )`
 
 
 ```js
-cf().grey('(').green('20ms', 'trim').grey(')').colorfy();
+const cf = colorfy({ autoJoin: true })
+cf.grey('(').green('20ms', 'trim').grey(')').colorfy();
 ```
 returns `(20ms)` (No space around the number)
 
@@ -145,7 +156,7 @@ cf().red('All colors are beautiful').print();
 ### indent(*num* size)
 
 Colorfy supports text indention. Indentions itself are always uncolorized.
-The indent method sets the indention for the next lines. It expects the indention size as its onliest argument.
+The indent method sets the indention for the next lines. It expects the indention size as its onliest argument. The size argument increase the current indention size.
 
 `indent(number)`
 
@@ -162,6 +173,11 @@ cf.indent(10)
 cf.white('WARNING!', 'bgred').nl()
 cf.white('The server is down!', 'bgred')
 ```
+Please note, a call of `indent()` inserts a line break.
+
+### reset()
+
+Reset the indention and inserts a line break.
 
 ### Pluralization
 
@@ -195,7 +211,8 @@ Preset configurations:
 | Property    | Description                                                       |
 | ----------- | ----------------------------------------------------------------- |
 | `trim`      | Enable word trimming ( Disabled by default )                      |
-| `indention` | Set the default indention for the `indent()` method. Default: `2` |
+| `indention` | Set the default indention for the `indent()` method. Default: `0` |
+| `autoJoin`  | Joins text blocks by a space. Default: `false`                    |
 
 
 

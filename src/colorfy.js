@@ -11,8 +11,8 @@ class Colorfy {
     }
 
     this.__config = {
-      trim: false,
-      indention: 2
+      autoJoin: false,
+      indention: 0
     }
 
     this.__indention = 0
@@ -22,6 +22,12 @@ class Colorfy {
 
   config (conf) {
     Object.assign(this.__config, conf)
+    if (conf.indention) {
+      this.__indention = this.__config.indention
+      if (this.lines.length === 0) {
+        this.curLine.indention = this.__config.indention
+      }
+    }
     return this
   }
 
@@ -34,7 +40,12 @@ class Colorfy {
       this.curLine.indention = size
     }
 
-    return this
+    return this.nl()
+  }
+
+  reset () {
+    this.__indention = 0
+    return this.nl()
   }
 
   /**
@@ -581,7 +592,7 @@ class Colorfy {
   }
 
   addTextItem (styles, text) {
-    if (!this.trimLeft && this.__config.trim === false) {
+    if (!this.trimLeft && this.__config.autoJoin === true) {
       styles = ' ' + styles
     }
 
@@ -646,6 +657,12 @@ class Colorfy {
 
 module.exports = function (text, styles) {
   let colorfy = new Colorfy()
+  if (text && typeof text === 'object') {
+    colorfy.config(text)
+    text = null
+    styles = null
+  }
+
   if (text) {
     colorfy.txt(text, styles)
   }
