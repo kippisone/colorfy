@@ -1,28 +1,6 @@
 'use strict'
 
-const COLOR_RED = '160'
-const COLOR_DRED = '124'
-const COLOR_YELLOW = '226'
-const COLOR_GREEN = '34'
-const COLOR_DGREEN = '28'
-const COLOR_BLUE = '21'
-const COLOR_DBLUE = '18'
-const COLOR_FIRE = '196'
-const COLOR_ORANGE = '208'
-const COLOR_AZURE = '33'
-const COLOR_LIME = '148'
-const COLOR_PINK = '199'
-const COLOR_PLUM = '93'
-const COLOR_TURQ = '39'
-const COLOR_ORED = '202'
-const COLOR_GREY = '247'
-const COLOR_DGREY = '244'
-const COLOR_DDGREY = '241'
-const COLOR_LGREY = '250'
-const COLOR_LLGREY = '254'
-const COLOR_LBROWN = '315'
-const COLOR_BLACK = '0'
-const COLOR_WHITE = '15'
+const color = require('./colors')
 
 class Colorfy {
   constructor () {
@@ -70,7 +48,7 @@ class Colorfy {
    */
   red (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_RED, styles), text)
+      this.addTextItem(this.getColorCode(color.RED, styles), text)
     }
     return this
   }
@@ -86,7 +64,7 @@ class Colorfy {
    */
   dred (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_DRED, styles), text)
+      this.addTextItem(this.getColorCode(color.DRED, styles), text)
     }
     return this
   }
@@ -102,7 +80,7 @@ class Colorfy {
    */
   yellow (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_YELLOW, styles), text)
+      this.addTextItem(this.getColorCode(color.YELLOW, styles), text)
     }
 
     return this
@@ -119,7 +97,7 @@ class Colorfy {
    */
   green (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_GREEN, styles), text)
+      this.addTextItem(this.getColorCode(color.GREEN, styles), text)
     }
 
     return this
@@ -136,7 +114,7 @@ class Colorfy {
    */
   dgreen (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_DGREEN, styles), text)
+      this.addTextItem(this.getColorCode(color.DGREEN, styles), text)
     }
 
     return this
@@ -153,7 +131,7 @@ class Colorfy {
    */
   blue (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_BLUE, styles), text)
+      this.addTextItem(this.getColorCode(color.BLUE, styles), text)
     }
 
     return this
@@ -170,7 +148,7 @@ class Colorfy {
    */
   dblue (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_DBLUE, styles), text)
+      this.addTextItem(this.getColorCode(color.DBLUE, styles), text)
     }
 
     return this
@@ -187,7 +165,7 @@ class Colorfy {
    */
   fire (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_FIRE, styles), text)
+      this.addTextItem(this.getColorCode(color.FIRE, styles), text)
     }
 
     return this
@@ -204,7 +182,7 @@ class Colorfy {
    */
   orange (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_ORANGE, styles), text)
+      this.addTextItem(this.getColorCode(color.ORANGE, styles), text)
     }
 
     return this
@@ -221,7 +199,7 @@ class Colorfy {
    */
   azure (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_AZURE, styles), text)
+      this.addTextItem(this.getColorCode(color.AZURE, styles), text)
     }
 
     return this
@@ -238,7 +216,7 @@ class Colorfy {
    */
   lime (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_LIME, styles), text)
+      this.addTextItem(this.getColorCode(color.LIME, styles), text)
     }
 
     return this
@@ -255,7 +233,7 @@ class Colorfy {
    */
   pink (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_PINK, styles), text)
+      this.addTextItem(this.getColorCode(color.PINK, styles), text)
     }
 
     return this
@@ -272,7 +250,7 @@ class Colorfy {
    */
   plum (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_PLUM, styles), text)
+      this.addTextItem(this.getColorCode(color.PLUM, styles), text)
     }
 
     return this
@@ -289,7 +267,7 @@ class Colorfy {
    */
   turq (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_TURQ, styles), text)
+      this.addTextItem(this.getColorCode(color.TURQ, styles), text)
     }
 
     return this
@@ -306,7 +284,7 @@ class Colorfy {
    */
   ored (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_ORED, styles), text)
+      this.addTextItem(this.getColorCode(color.ORED, styles), text)
     }
 
     return this
@@ -323,7 +301,7 @@ class Colorfy {
    */
   grey (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_GREY, styles), text)
+      this.addTextItem(this.getColorCode(color.GREY, styles), text)
     }
 
     return this
@@ -340,7 +318,7 @@ class Colorfy {
    */
   dgrey (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_DGREY, styles), text)
+      this.addTextItem(this.getColorCode(color.DGREY, styles), text)
     }
 
     return this
@@ -357,7 +335,7 @@ class Colorfy {
    */
   ddgrey (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_DDGREY, styles), text)
+      this.addTextItem(this.getColorCode(color.DDGREY, styles), text)
     }
 
     return this
@@ -374,7 +352,7 @@ class Colorfy {
    */
   lgrey (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_LGREY, styles), text)
+      this.addTextItem(this.getColorCode(color.LGREY, styles), text)
     }
 
     return this
@@ -391,7 +369,7 @@ class Colorfy {
    */
   black (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_BLACK, styles), text)
+      this.addTextItem(this.getColorCode(color.BLACK, styles), text)
     }
 
     return this
@@ -408,7 +386,7 @@ class Colorfy {
    */
   white (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_WHITE, styles), text)
+      this.addTextItem(this.getColorCode(color.WHITE, styles), text)
     }
 
     return this
@@ -425,7 +403,7 @@ class Colorfy {
    */
   llgrey (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_LLGREY, styles), text)
+      this.addTextItem(this.getColorCode(color.LLGREY, styles), text)
     }
 
     return this
@@ -442,7 +420,24 @@ class Colorfy {
    */
   lbrown (text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(COLOR_LBROWN, styles), text)
+      this.addTextItem(this.getColorCode(color.LBROWN, styles), text)
+    }
+
+    return this
+  }
+
+  /**
+   * Draws brown text
+   *
+   * @method brown
+   * @param  {String} text   Text to be colorfied
+   * @param  {String} styles Text styles (bold underlined)
+   * @chainable
+   * @return {object}        Returns this value
+   */
+  brown (text, styles) {
+    if (text) {
+      this.addTextItem(this.getColorCode(color.BROWN, styles), text)
     }
 
     return this
@@ -453,14 +448,14 @@ class Colorfy {
    *
    * @method ansi
    * @chainable
-   * @param  {Number} color   Ansi color code. Must be a range between 0 and 256
+   * @param  {Number} colorCode   Ansi color code. Must be a range between 0 and 256
    * @param  {String} text   Text to be colorfied
    * @param  {String} styles Text styles (bold underlined)
    * @return {Object}        Returns this value
    */
-  ansi (color, text, styles) {
+  ansi (colorCode, text, styles) {
     if (text) {
-      this.addTextItem(this.getColorCode(color, styles), text)
+      this.addTextItem(this.getColorCode(colorCode, styles), text)
     }
 
     return this
@@ -526,7 +521,7 @@ class Colorfy {
     return this.flush(printColors === false ? false : this.isTTY)
   }
 
-  getColorCode (color, styles) {
+  getColorCode (colorCode, styles) {
     let style = ''
 
     if (styles) {
@@ -540,27 +535,30 @@ class Colorfy {
           case 'invert': style += ';7'; break
           case 'ltrim': this.trimLeft = true; break
           case 'rtrim': this.trimRight = true; break
-          case 'bgred' : style += ';48;5;' + COLOR_RED; break
-          case 'bgdred' : style += ';48;5;' + COLOR_DRED; break
-          case 'bgyellow' : style += ';48;5;' + COLOR_YELLOW; break
-          case 'bgdgreen' : style += ';48;5;' + COLOR_DGREEN; break
-          case 'bggreen' : style += ';48;5;' + COLOR_GREEN; break
-          case 'bgblue' : style += ';48;5;' + COLOR_BLUE; break
-          case 'bgdblue' : style += ';48;5;' + COLOR_DBLUE; break
-          case 'bgfire' : style += ';48;5;' + COLOR_FIRE; break
-          case 'bgorange' : style += ';48;5;' + COLOR_ORANGE; break
-          case 'bgazure' : style += ';48;5;' + COLOR_AZURE; break
-          case 'bglime' : style += ';48;5;' + COLOR_LIME; break
-          case 'bgpink' : style += ';48;5;' + COLOR_PINK; break
-          case 'bgplum' : style += ';48;5;' + COLOR_PLUM; break
-          case 'bgturq' : style += ';48;5;' + COLOR_TURQ; break
-          case 'bgored' : style += ';48;5;' + COLOR_ORED; break
-          case 'bggrey' : style += ';48;5;' + COLOR_GREY; break
-          case 'bgdgrey' : style += ';48;5;' + COLOR_DGREY; break
-          case 'bgddgrey' : style += ';48;5;' + COLOR_DDGREY; break
-          case 'bglgrey' : style += ';48;5;' + COLOR_LGREY; break
-          case 'bgllgrey' : style += ';48;5;' + COLOR_LLGREY; break
-          case 'bglbrown' : style += ';48;5;' + COLOR_LBROWN; break
+          case 'bgred' : style += ';48;5;' + color.RED; break
+          case 'bgdred' : style += ';48;5;' + color.DRED; break
+          case 'bgyellow' : style += ';48;5;' + color.YELLOW; break
+          case 'bgdgreen' : style += ';48;5;' + color.DGREEN; break
+          case 'bggreen' : style += ';48;5;' + color.GREEN; break
+          case 'bgblue' : style += ';48;5;' + color.BLUE; break
+          case 'bgdblue' : style += ';48;5;' + color.DBLUE; break
+          case 'bgfire' : style += ';48;5;' + color.FIRE; break
+          case 'bgorange' : style += ';48;5;' + color.ORANGE; break
+          case 'bgazure' : style += ';48;5;' + color.AZURE; break
+          case 'bglime' : style += ';48;5;' + color.LIME; break
+          case 'bgpink' : style += ';48;5;' + color.PINK; break
+          case 'bgplum' : style += ';48;5;' + color.PLUM; break
+          case 'bgturq' : style += ';48;5;' + color.TURQ; break
+          case 'bgored' : style += ';48;5;' + color.ORED; break
+          case 'bggrey' : style += ';48;5;' + color.GREY; break
+          case 'bgdgrey' : style += ';48;5;' + color.DGREY; break
+          case 'bgddgrey' : style += ';48;5;' + color.DDGREY; break
+          case 'bglgrey' : style += ';48;5;' + color.LGREY; break
+          case 'bgllgrey' : style += ';48;5;' + color.LLGREY; break
+          case 'bglbrown' : style += ';48;5;' + color.LBROWN; break
+          case 'bgbrown' : style += ';48;5;' + color.BROWN; break
+          case 'bgblack' : style += ';48;5;' + color.BLACK; break
+          case 'bgwhite' : style += ';48;5;' + color.WHITE; break
 
           case 'trim':
             this.trimLeft = true
@@ -571,15 +569,15 @@ class Colorfy {
       })
     }
 
-    if (color) {
-      color = '38;5;' + color
+    if (colorCode) {
+      colorCode = '38;5;' + colorCode
     }
 
-    if (!color && !style) {
+    if (!colorCode && !style) {
       return ''
     }
 
-    return `\u001b[${color}${style}m`
+    return `\u001b[${colorCode}${style}m`
   }
 
   addTextItem (styles, text) {
@@ -657,123 +655,32 @@ module.exports = function (text, styles) {
 
 module.exports.Colorfy = Colorfy
 
-// Static methods
-module.exports.red = (text, styles) => {
+/**
+ * Colorize input in any ansi
+ *
+ * @static
+ * @method ansi
+ * @param {str} colorCode Color code
+ * @param {str} text Input string
+ * @returns {str} Returns a colorized string
+ */
+module.exports.ansi = (colorCode, text, styles) => {
   const colorfy = new Colorfy()
-  return colorfy.red(text, styles).colorfy()
+  return colorfy.ansi(colorCode, text, styles).colorfy()
 }
 
-module.exports.dred = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.dred(text, styles).colorfy()
-}
+/**
+ * Colorize input in a color
+ *
+ * @static
+ * @method [color]
+ * @param {str} text Input string
+ * @returns {str} Returns a colorized string
+ */
 
-module.exports.yellow = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.yellow(text, styles).colorfy()
-}
-
-module.exports.green = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.green(text, styles).colorfy()
-}
-
-module.exports.dgreen = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.dgreen(text, styles).colorfy()
-}
-
-module.exports.blue = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.blue(text, styles).colorfy()
-}
-
-module.exports.dblue = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.dblue(text, styles).colorfy()
-}
-
-module.exports.fire = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.fire(text, styles).colorfy()
-}
-
-module.exports.orange = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.orange(text, styles).colorfy()
-}
-
-module.exports.azure = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.azure(text, styles).colorfy()
-}
-
-module.exports.lime = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.lime(text, styles).colorfy()
-}
-
-module.exports.pink = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.pink(text, styles).colorfy()
-}
-
-module.exports.plum = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.plum(text, styles).colorfy()
-}
-
-module.exports.turq = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.turq(text, styles).colorfy()
-}
-
-module.exports.ored = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.ored(text, styles).colorfy()
-}
-
-module.exports.grey = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.grey(text, styles).colorfy()
-}
-
-module.exports.dgrey = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.dgrey(text, styles).colorfy()
-}
-
-module.exports.ddgrey = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.ddgrey(text, styles).colorfy()
-}
-
-module.exports.lgrey = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.lgrey(text, styles).colorfy()
-}
-
-module.exports.black = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.black(text, styles).colorfy()
-}
-
-module.exports.white = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.white(text, styles).colorfy()
-}
-
-module.exports.llgrey = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.llgrey(text, styles).colorfy()
-}
-
-module.exports.lbrown = (text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.lbrown(text, styles).colorfy()
-}
-
-module.exports.ansi = (color, text, styles) => {
-  const colorfy = new Colorfy()
-  return colorfy.ansi(color, text, styles).colorfy()
-}
+color.colorMethods.forEach((col) => {
+  module.exports[col.name] = (text, styles) => {
+    const colorfy = new Colorfy()
+    return colorfy.ansi(col.color, text, styles).colorfy()
+  }
+})

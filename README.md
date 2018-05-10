@@ -16,15 +16,20 @@ Usage
 -----
 
 ```js
-let cf = require('colorfy');
+const cf = require('colorfy');
 console.log(cf().red('Hello').green('colorful').blue('World!').colorfy());
+
+// static methods
+const green = colorfy.green('Green text')
+const red = colorfy.red('Red text')
 ```
 
 Methods
 -------
 
-The `cf()` method returns a colorfy instance. All colorize methods are chainable.
-Pass `colorfy()` as last method to a chain to get a pretty colorful string  
+The `cf()` call in the example above returns a colorfy instance. All colorize methods are chainable.
+Pass `colorfy()` as last method to a chain to get a pretty colorful string.
+Since version `v2.0.0`, colofy returns all color methods as static methods too.
 
 `red(text, [styles])` Draws red text  
 `yellow(text, [styles])` Draws yellow text  
@@ -86,7 +91,7 @@ The `styles` argument is optional and defines the text style.
 `bgllgrey` Draws light light grey background  
 `bglbrown` Draws light brown background  
 
-Seperate multiple stylings by a space `cf().red('foo', 'bold underline')`
+Seperate stylings by a space `cf().red('foo', 'bold underline')`
 
 ### Background colors
 
@@ -127,7 +132,7 @@ The `cf()` method can be used as a shortcut of `cf().txt()`
 cf('Plain text') === cf().txt('Plain text')
 ```
 
-### print()
+### print([*bool* colorize])
 
 The print method prints a colorfy chain to stdout.
 The comands below are the same
@@ -135,6 +140,27 @@ The comands below are the same
 ```js
 console.log(cf().red('All colors are beautiful').colorfy());
 cf().red('All colors are beautiful').print();
+```
+
+### indent(*num* size)
+
+Colorfy supports text indention. Indentions itself are always uncolorized.
+The indent method sets the indention for the next lines. It expects the indention size as its onliest argument.
+
+`indent(number)`
+
+```js
+const cf = colorfy()
+cf.txt(' '.repeat(10)).white('WARNING!', 'bgred').nl()
+cf.txt(' '.repeat(10)).white('The server is down!', 'bgred')
+```
+The code with usage of `indent()` is quite smarter.
+
+```js
+const cf = colorfy()
+cf.indent(10)
+cf.white('WARNING!', 'bgred').nl()
+cf.white('The server is down!', 'bgred')
 ```
 
 ### Pluralization
@@ -148,7 +174,33 @@ cf().green(passedTests).txt(['test passed', 'tests passed', passedTests]).print(
 cf().red(failedTests).txt(['test failed', 'tests failed', failedTests]).print());
 ```
 
+
+This example would render a red block
+
+### Config
+
+Preset configurations can be changed by using the `config()` method.
+
+```js
+const cf = colorfy()
+cf.config({
+  trim: true
+})
+
+cf.txt('(').green('13ms').txt(')') // Returns (13ms)
+```
+
+Preset configurations:
+
+| Property    | Description                                                       |
+| ----------- | ----------------------------------------------------------------- |
+| `trim`      | Enable word trimming ( Disabled by default )                      |
+| `indention` | Set the default indention for the `indent()` method. Default: `2` |
+
+
+
+
 #### Author
 
-(c) 2016 by Andifeind  
+(c) 2016 by Andi Heinkelein  
 Licensed under MIT license.

@@ -4,30 +4,36 @@ const sinon = require('sinon')
 inspect.useSinon(sinon)
 
 const colorfy = require('../../')
+const color = require('../../src/colors')
 
-const COLOR_RED = '160'
-const COLOR_DRED = '124'
-const COLOR_YELLOW = '226'
-const COLOR_GREEN = '34'
-const COLOR_DGREEN = '28'
-const COLOR_BLUE = '21'
-const COLOR_DBLUE = '18'
-const COLOR_FIRE = '196'
-const COLOR_ORANGE = '208'
-const COLOR_AZURE = '33'
-const COLOR_LIME = '148'
-const COLOR_PINK = '199'
-const COLOR_PLUM = '93'
-const COLOR_TURQ = '39'
-const COLOR_ORED = '202'
-const COLOR_GREY = '247'
-const COLOR_DGREY = '244'
-const COLOR_DDGREY = '241'
-const COLOR_LGREY = '250'
-const COLOR_LLGREY = '254'
-const COLOR_LBROWN = '315'
-const COLOR_BLACK = '0'
-const COLOR_WHITE = '15'
+const stylings = [
+  { name: 'bold', value: ';1' },
+  { name: 'italic', value: ';3' },
+  { name: 'underline', value: ';4' },
+  { name: 'blink', value: ';5' },
+  { name: 'invert', value: ';7' },
+  { name: 'bgred', value: `;48;5;${color.RED}` },
+  { name: 'bgdred', value: `;48;5;${color.DRED}` },
+  { name: 'bgyellow', value: `;48;5;${color.YELLOW}` },
+  { name: 'bggreen', value: `;48;5;${color.GREEN}` },
+  { name: 'bgdgreen', value: `;48;5;${color.DGREEN}` },
+  { name: 'bgblue', value: `;48;5;${color.BLUE}` },
+  { name: 'bgdblue', value: `;48;5;${color.DBLUE}` },
+  { name: 'bgfire', value: `;48;5;${color.FIRE}` },
+  { name: 'bgorange', value: `;48;5;${color.ORANGE}` },
+  { name: 'bgazure', value: `;48;5;${color.AZURE}` },
+  { name: 'bglime', value: `;48;5;${color.LIME}` },
+  { name: 'bgpink', value: `;48;5;${color.PINK}` },
+  { name: 'bgplum', value: `;48;5;${color.PLUM}` },
+  { name: 'bgturq', value: `;48;5;${color.TURQ}` },
+  { name: 'bgored', value: `;48;5;${color.ORED}` },
+  { name: 'bggrey', value: `;48;5;${color.GREY}` },
+  { name: 'bgdgrey', value: `;48;5;${color.DGREY}` },
+  { name: 'bgddgrey', value: `;48;5;${color.DDGREY}` },
+  { name: 'bglgrey', value: `;48;5;${color.LGREY}` },
+  { name: 'bgllgrey', value: `;48;5;${color.LLGREY}` },
+  { name: 'bglbrown', value: `;48;5;${color.LBROWN}` }
+]
 
 describe('Colorfy', () => {
   tb.define('first-line', () => {
@@ -146,62 +152,7 @@ describe('Colorfy', () => {
     })
   })
 
-  const colorMethods = [
-    { name: 'red', color: COLOR_RED },
-    { name: 'dred', color: COLOR_DRED },
-    { name: 'yellow', color: COLOR_YELLOW },
-    { name: 'green', color: COLOR_GREEN },
-    { name: 'dgreen', color: COLOR_DGREEN },
-    { name: 'blue', color: COLOR_BLUE },
-    { name: 'dblue', color: COLOR_DBLUE },
-    { name: 'fire', color: COLOR_FIRE },
-    { name: 'orange', color: COLOR_ORANGE },
-    { name: 'azure', color: COLOR_AZURE },
-    { name: 'lime', color: COLOR_LIME },
-    { name: 'pink', color: COLOR_PINK },
-    { name: 'plum', color: COLOR_PLUM },
-    { name: 'turq', color: COLOR_TURQ },
-    { name: 'ored', color: COLOR_ORED },
-    { name: 'grey', color: COLOR_GREY },
-    { name: 'dgrey', color: COLOR_DGREY },
-    { name: 'ddgrey', color: COLOR_DDGREY },
-    { name: 'lgrey', color: COLOR_LGREY },
-    { name: 'llgrey', color: COLOR_LLGREY },
-    { name: 'lbrown', color: COLOR_LBROWN },
-    { name: 'black', color: COLOR_BLACK },
-    { name: 'white', color: COLOR_WHITE }
-  ]
-
-  const stylings = [
-    { name: 'bold', value: ';1' },
-    { name: 'italic', value: ';3' },
-    { name: 'underline', value: ';4' },
-    { name: 'blink', value: ';5' },
-    { name: 'invert', value: ';7' },
-    { name: 'bgred', value: `;48;5;${COLOR_RED}` },
-    { name: 'bgdred', value: `;48;5;${COLOR_DRED}` },
-    { name: 'bgyellow', value: `;48;5;${COLOR_YELLOW}` },
-    { name: 'bggreen', value: `;48;5;${COLOR_GREEN}` },
-    { name: 'bgdgreen', value: `;48;5;${COLOR_DGREEN}` },
-    { name: 'bgblue', value: `;48;5;${COLOR_BLUE}` },
-    { name: 'bgdblue', value: `;48;5;${COLOR_DBLUE}` },
-    { name: 'bgfire', value: `;48;5;${COLOR_FIRE}` },
-    { name: 'bgorange', value: `;48;5;${COLOR_ORANGE}` },
-    { name: 'bgazure', value: `;48;5;${COLOR_AZURE}` },
-    { name: 'bglime', value: `;48;5;${COLOR_LIME}` },
-    { name: 'bgpink', value: `;48;5;${COLOR_PINK}` },
-    { name: 'bgplum', value: `;48;5;${COLOR_PLUM}` },
-    { name: 'bgturq', value: `;48;5;${COLOR_TURQ}` },
-    { name: 'bgored', value: `;48;5;${COLOR_ORED}` },
-    { name: 'bggrey', value: `;48;5;${COLOR_GREY}` },
-    { name: 'bgdgrey', value: `;48;5;${COLOR_DGREY}` },
-    { name: 'bgddgrey', value: `;48;5;${COLOR_DDGREY}` },
-    { name: 'bglgrey', value: `;48;5;${COLOR_LGREY}` },
-    { name: 'bgllgrey', value: `;48;5;${COLOR_LLGREY}` },
-    { name: 'bglbrown', value: `;48;5;${COLOR_LBROWN}` }
-  ]
-
-  colorMethods.forEach((test) => {
+  color.colorMethods.forEach((test) => {
     describe(`${test.name}()`, () => {
       it('Creates a colorized text item without any colorizing', () => {
         const cf = colorfy()
@@ -229,10 +180,10 @@ describe('Colorfy', () => {
       })
 
       stylings.forEach((style) => {
-        it(`renders a colorized ${style.name} text string`, () => {
+        it(`renders a colorized ${style.name} text string (#${test.color})`, () => {
           const cf = colorfy()
           cf.ansi(test.color, 'Hello World!', style.name)
-          const str = cf.flush(true)
+          const str = cf.colorfy(true)
           inspect(str).isEql(`\u001b[38;5;${test.color}${style.value}mHello World!\u001b[m`)
         })
       })
@@ -309,6 +260,28 @@ describe('Colorfy', () => {
         ' \u001b[38;5;34;mabsolutely\u001b[m\n' +
         ' \u001b[38;5;34;meverything\u001b[m'
       )
+    })
+  })
+
+  describe('Static methods', () => {
+    color.colorMethods.forEach((method) => {
+      it(`${method.name}() is a static method`, () => {
+        inspect(colorfy).hasMethod(method.name)
+      })
+
+      it(`${method.name}() returns a colorized string`, () => {
+        const str = colorfy[method.name]('colorized')
+        inspect(str).isEql(`\u001b[38;5;${method.color}mcolorized\u001b[m`)
+      })
+    })
+
+    it(`ansi() is a static method`, () => {
+      inspect(colorfy).hasMethod('ansi')
+    })
+
+    it(`ansi() returns a colorized string`, () => {
+      const str = colorfy.ansi(color.RED, 'colorized')
+      inspect(str).isEql(`\u001b[38;5;${color.RED}mcolorized\u001b[m`)
     })
   })
 })
