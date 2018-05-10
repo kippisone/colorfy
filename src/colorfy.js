@@ -529,7 +529,7 @@ class Colorfy {
    * @return {String} Returns a colorfied string
    */
   colorfy (printColors) {
-    return this.flush(printColors === false ? false : this.isTTY)
+    return this.flush(typeof printColors === 'boolean' ? printColors : this.isTTY)
   }
 
   getColorCode (colorCode, styles) {
@@ -651,7 +651,7 @@ class Colorfy {
    * @param  {Boolean} printColors Set this to false to disable colorfied output
    */
   print (printColors) {
-    console.log(this.flush(printColors === false ? false : this.isTTY))
+    console.log(this.flush(typeof printColors === 'boolean' ? printColors : this.isTTY))
   }
 }
 
@@ -683,7 +683,7 @@ module.exports.Colorfy = Colorfy
  */
 module.exports.ansi = (colorCode, text, styles) => {
   const colorfy = new Colorfy()
-  return colorfy.ansi(colorCode, text, styles).colorfy()
+  return colorfy.ansi(colorCode, text, styles).colorfy(true)
 }
 
 /**

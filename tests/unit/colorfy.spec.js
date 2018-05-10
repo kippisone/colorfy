@@ -247,7 +247,6 @@ describe('Colorfy', () => {
     it('Flushes all buffered lines and returns it as a string, with an indention of 1', () => {
       const cf = tb.run(['first-line-indent', 'second-line', 'third-line'])
       const str = cf.flush(true)
-      console.log(`#${str}#`)
       inspect(str).isEql(
         ' \u001b[;1mHello World\u001b[m\n' +
         ' everything is awesome\u001b[38;5;34;m...\u001b[m\n' +
