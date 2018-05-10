@@ -596,3 +596,124 @@ module.exports = function (text, styles) {
 }
 
 module.exports.Colorfy = Colorfy
+
+// Static methods
+module.exports.red = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.red(text, styles).colorfy()
+}
+
+module.exports.dred = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.dred(text, styles).colorfy()
+}
+
+module.exports.yellow = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.yellow(text, styles).colorfy()
+}
+
+module.exports.green = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.green(text, styles).colorfy()
+}
+
+module.exports.dgreen = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.dgreen(text, styles).colorfy()
+}
+
+module.exports.blue = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.blue(text, styles).colorfy()
+}
+
+module.exports.dblue = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.dblue(text, styles).colorfy()
+}
+
+module.exports.fire = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.fire(text, styles).colorfy()
+}
+
+module.exports.orange = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.orange(text, styles).colorfy()
+}
+
+module.exports.azure = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.azure(text, styles).colorfy()
+}
+
+module.exports.lime = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.lime(text, styles).colorfy()
+}
+
+module.exports.pink = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.pink(text, styles).colorfy()
+}
+
+module.exports.plum = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.plum(text, styles).colorfy()
+}
+
+module.exports.turq = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.turq(text, styles).colorfy()
+}
+
+module.exports.ored = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.ored(text, styles).colorfy()
+}
+
+module.exports.grey = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.grey(text, styles).colorfy()
+}
+
+module.exports.dgrey = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.dgrey(text, styles).colorfy()
+}
+
+module.exports.ddgrey = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.ddgrey(text, styles).colorfy()
+}
+
+module.exports.lgrey = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.lgrey(text, styles).colorfy()
+}
+
+module.exports.black = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.black(text, styles).colorfy()
+}
+
+module.exports.white = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.white(text, styles).colorfy()
+}
+
+module.exports.llgrey = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.llgrey(text, styles).colorfy()
+}
+
+module.exports.lbrown = (text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.lbrown(text, styles).colorfy()
+}
+
+module.exports.ansi = (color, text, styles) => {
+  const colorfy = new Colorfy()
+  return colorfy.ansi(color, text, styles).colorfy()
+}
