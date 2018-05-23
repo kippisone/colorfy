@@ -600,7 +600,7 @@ class Colorfy {
       return
     }
 
-    text = String(text)
+    text = Array.isArray(text) ? text[2] === 1 ? String(text[0]) : String(text[1]) : String(text)
 
     const chunks = text.split(/\n/g)
     const firstLine = chunks.shift()

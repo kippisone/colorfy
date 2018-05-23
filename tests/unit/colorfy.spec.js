@@ -230,6 +230,28 @@ describe('Colorfy', () => {
         { indention: 0, values: [ ['\u001b[38;5;34;m', 'absolutely'] ] }
       ])
     })
+
+    it('pushes a singular item', () => {
+      const cf = colorfy()
+      cf.txt(['one', 'two', 1])
+      inspect(cf.curLine).isEql({
+        values: [['', 'one']],
+        indention: 0
+      })
+
+      inspect(cf.lines).isArray().hasLength(0)
+    })
+
+    it('pushes a plural item', () => {
+      const cf = colorfy()
+      cf.txt(['one', 'two', 2])
+      inspect(cf.curLine).isEql({
+        values: [['', 'two']],
+        indention: 0
+      })
+
+      inspect(cf.lines).isArray().hasLength(0)
+    })
   })
 
   describe('flush()', () => {
