@@ -1,6 +1,6 @@
 {
   "name": "colorfy",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Colorfy colorize your console with pretty ansi color codes. It has static color methods and supports a chained colorization of your tty console output.",
   "main": "src/colorfy.js",
   "scripts": {
