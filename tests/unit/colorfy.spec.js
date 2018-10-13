@@ -264,6 +264,9 @@ describe('Colorfy', () => {
         '\u001b[38;5;34;mabsolutely\u001b[m\n' +
         '\u001b[38;5;34;meverything\u001b[m'
       )
+
+      inspect(cf.lines).isArray()
+      inspect(cf.lines).isEmpty()
     })
 
     it('Flushes all buffered lines and returns it as a string, with an indention of 1', () => {
@@ -275,6 +278,9 @@ describe('Colorfy', () => {
         ' \u001b[38;5;34;mabsolutely\u001b[m\n' +
         ' \u001b[38;5;34;meverything\u001b[m'
       )
+
+      inspect(cf.lines).isArray()
+      inspect(cf.lines).isEmpty()
     })
   })
 

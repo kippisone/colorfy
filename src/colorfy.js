@@ -630,7 +630,7 @@ class Colorfy {
       indention: this.__indention
     }
 
-    return this.lines.map((line) => {
+    const lines = this.lines.map((line) => {
       const indentionStr = line.indention ? ' '.repeat(line.indention) : ''
       return indentionStr + line.values.map((chunk) => {
         if (!printColors) {
@@ -640,6 +640,9 @@ class Colorfy {
         return chunk[0] ? chunk[0] + chunk[1] + '\u001b[m' : chunk[1]
       }).join('')
     }).join('\n')
+
+    this.lines = []
+    return lines
   }
 
   toString () {
