@@ -3,7 +3,7 @@
 const color = require('./colors')
 
 class Colorfy {
-  constructor () {
+  constructor (conf) {
     this.lines = []
     this.curLine = {
       values: [],
@@ -13,6 +13,10 @@ class Colorfy {
     this.__config = {
       autoJoin: false,
       indention: 0
+    }
+
+    if (conf) {
+      this.config(conf)
     }
 
     this.__indention = 0
@@ -510,7 +514,7 @@ class Colorfy {
 
     if (num) {
       this.lines.push({
-        values: [['', num >= 1 ? '\n'.repeat(num - 1) : '']],
+        values: [['', num >= 2 ? '\n'.repeat(num - 2) : '']],
         indention: 0
       })
     }
