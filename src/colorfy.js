@@ -28,7 +28,7 @@ class Colorfy {
     Object.assign(this.__config, conf)
     if (conf.indention) {
       this.__indention = this.__config.indention
-      if (this.lines.length === 0 && this.curLine.values.lenght === 0) {
+      if (this.lines.length === 0 && this.curLine.values.length === 0) {
         this.curLine.indention = this.__config.indention
       }
     }
@@ -40,7 +40,7 @@ class Colorfy {
       this.__indention += size
     }
 
-    if (this.lines.length === 0 && this.curLine.values.lenght === 0) {
+    if (this.lines.length === 0 && this.curLine.values.length === 0) {
       this.curLine.indention = size
     }
 
@@ -515,7 +515,7 @@ class Colorfy {
     if (num) {
       this.lines.push({
         values: [['', num >= 2 ? '\n'.repeat(num - 2) : '']],
-        indention: 0
+        indention: this.__indention
       })
     }
 
