@@ -40,6 +40,10 @@ class Colorfy {
       this.__indention += size
     }
 
+    if (this.__indention < 0) {
+      throw new Error('Indention went below zero in colorfy.indent()!')
+    }
+
     if (this.lines.length === 0 && this.curLine.values.length === 0) {
       this.curLine.indention = size
     }
@@ -486,14 +490,14 @@ class Colorfy {
    */
   auto (text, styles) {
     if (text) {
-      let startCode = 30
+      const startCode = 30
       let sum = 0
       for (let i = 0; i < text.length; i++) {
         sum += text.charCodeAt(i)
       }
 
-      let colorCode = startCode + parseInt(String(sum).substr(-2)) * 2
-      let color = this.getColorCode(colorCode, styles)
+      const colorCode = startCode + parseInt(String(sum).substr(-2)) * 2
+      const color = this.getColorCode(colorCode, styles)
       this.addTextItem(color, text)
     }
 
@@ -502,7 +506,7 @@ class Colorfy {
 
   txt (text, styles) {
     if (text) {
-      let style = styles ? this.getColorCode('', styles) : ''
+      const style = styles ? this.getColorCode('', styles) : ''
       this.addTextItem(style, text)
     }
 
@@ -663,7 +667,7 @@ class Colorfy {
 }
 
 module.exports = function (text, styles) {
-  let colorfy = new Colorfy()
+  const colorfy = new Colorfy()
   if (text && typeof text === 'object') {
     colorfy.config(text)
     text = null
